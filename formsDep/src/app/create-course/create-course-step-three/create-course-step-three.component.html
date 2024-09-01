@@ -1,0 +1,35 @@
+<p>create-course-step-three works!</p>
+
+<h3>Add Course Lessons</h3>
+
+<div class="add-lessons-form" [formGroup]="stepThreeForm">
+
+    <ng-container formArrayName="lessons">
+        <ng-container *ngFor="let lessonForm of lessons.controls;let i=index">
+            <div class="lesson-form-row" [formGroupName]="i">
+                <mat-form-field appearance="fill">
+                    <input 
+                        matInput 
+                        placeholder="Lesson Title"
+                        formControlName="title">
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-select 
+                        formControlName="level" 
+                        placeholder="Lesson Level">
+                        <mat-option value="beginner">Beginner</mat-option>
+                        <mat-option value="intermediate">Intermediate</mat-option>
+                        <mat-option value="advance">Advance</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-icon (click)="deleteLessons(i)"class=delete-btn>delete_forever</mat-icon>
+            </div>
+
+        </ng-container>
+    </ng-container>
+    <!-- mat-mini-fab -->
+    <button  (click)="addLesson()">
+        Add
+        <!-- <mat-icon class="add-course-btn" ></mat-icon> -->
+    </button>
+</div>

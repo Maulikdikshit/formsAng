@@ -1,0 +1,28 @@
+<div [formGroup]="stepTwoForm">
+
+    <mat-radio-group formControlName="courseType">
+        <mat-radio-button value="free">Free</mat-radio-button>
+        <mat-radio-button value="premium">Premium</mat-radio-button>
+    </mat-radio-group>
+
+    <app-file-upload requiredFileType="image/png" formControlName="thumbnail"></app-file-upload>
+
+    <mat-form-field>
+        <input type="number" matInput placeholder="Price" formControlName="price">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Promotional period</mat-label>
+
+        <mat-datepicker-toggle matSuffix [for]="promoPicker"></mat-datepicker-toggle>
+        <mat-date-range-picker #promoPicker></mat-date-range-picker>
+
+        <mat-date-range-input [rangePicker]="promoPicker">
+            <input matStartDate placeholder="Start Date" formControlName="promoStartAt">
+            <input matEndDate placeholder="End Date" formControlName="promoEndAt">
+            
+        </mat-date-range-input>
+        <mat-error *ngIf="stepTwoForm.errors?.['promoPeriod'] && stepTwoForm.dirty">The start date must be before end date</mat-error>
+    </mat-form-field>
+
+</div>

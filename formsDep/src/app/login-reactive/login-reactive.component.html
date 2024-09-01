@@ -1,0 +1,28 @@
+<p>login-reactive works!</p>
+
+<mat-card class="login-page">
+    <mat-card-title>
+        Login (Reactive)
+    </mat-card-title>
+    <mat-card-content>
+        <form class="login-form data-form" [formGroup] = "formBuilderReactive">
+            <mat-form-field>
+                <input matInput formControlName="email" type="email" name="email" placeholder="Email">
+                <mat-error *ngIf="emailControl?.errors?.['required']">The email is mandatory</mat-error>
+                <mat-error *ngIf="emailControl?.errors?.['minlength']">
+                    Your email must have {{emailControl.errors?.['minlength']?.requiredLength}} but it only has {{emailControl.errors?.['minlength']?.actualLength}}</mat-error>
+
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput  type="password" formControlName="password" placeholder="Passowrd">
+                <ng-container *ngIf="passwordControl?.errors | onlyOneError: ['minlength','passwordStrength'] as error" >
+                    <mat-error *ngIf="error?.['passwordStrength']">Weak Password</mat-error>
+                    <mat-error *ngIf="error?.['minlength']">Your password must have {{error?.['minlength']?.requiredLength}} but it only has {{error?.['minlength']?.actualLength}}</mat-error>
+                </ng-container>
+            </mat-form-field>
+            <button mat-raised-button color="primary" [disabled]="!formBuilderReactive.valid" (click)="login()">
+                Login
+            </button>
+        </form>
+    </mat-card-content>
+</mat-card>
